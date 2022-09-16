@@ -13,4 +13,4 @@
 - "Nakarm shreka" - minigra, pozwala opiekować się wirtualnym shrekiem, tzn dbać o to żeby był radosny (około 2 dni od ostatniej opieki żeby shrek był maksymalnie niezadowolony)
 - Możliwość wsparcia finansowego strony.
 
-***[Link do projektu w Figmie](https://cdn.discordapp.com/attachments/903359269733294140/1019315503333904434/unknown.png)***
+***[Link do projektu w Figmie](https://www.figma.com/proto/xgsBZYRTZ3Jm7AWBM7xoUP/Untitled?node-id=1%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=14%3A93)***
