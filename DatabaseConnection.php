@@ -2,15 +2,16 @@
 
 class DatabaseConnection{
     private static ?DatabaseConnection $initialObject;
-    private ?mysqli $connection;
+    public ?mysqli $connection;
 
     private function __construct(){}
-    public function defineTraits($h, $u, $p, $d){
-        $this->connection = new mysqli($h, $u, $p, $d);
-    }
-    public static function getInstance(){
+
+    public static function defineTraits($h, $u, $p, $d){
         if(!isset(DatabaseConnection::$initialObject))
             DatabaseConnection::$initialObject = new DatabaseConnection(); 
+        DatabaseConnection::$initialObject->connection = new mysqli($h, $u, $p, $d);
+    }
+    public static function getInstance(){
         return DatabaseConnection::$initialObject;
     }
 
