@@ -1,6 +1,6 @@
 <?php
 function checkEmail(string $ea) : string{
-    if(preg_match(FILTER_VALIDATE_EMAIL, $ea)){
+    if(filter_var($ea, FILTER_VALIDATE_EMAIL)){
         return "Email format incorrect!";
     }
     return "none";

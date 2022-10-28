@@ -12,8 +12,6 @@ class Account{
     public string $descriptions;
     public string $profile_picture;
 
-    public string $error;
-
     public function __construct(int $ia, string $ea, string $p, string $cd, string $n, string $d, string $pp){
         $this->id_account = $ia;
         $this->email_adress = $ea;
@@ -23,21 +21,22 @@ class Account{
         $this->descriptions = $d;
         $this->profile_picture = $pp;
     }
-    public static function createNew(string $ea, string $p, string $n, string $d, string $pp){
+    public static function createNew(string $ea, string $p, string $n, string $d, string $pp){ //returns either error message or a newly created account that is already in the database
         $error = checkEmail($ea); $error = checkPass($p); $error = checkNickname($n);
-        
+        $rn = date("d-m-y h:i:s");
         if($error == "none"){
             $con = DatabaseConnection::getInstance();
-            if($con->connection->query("insert into Accounts(email_adress, nickname, pass, creation_date, descriptions, profile_picture) values(".$ea.", ".md5($p).", ".date("d-m-y h:i:s").", ".$n.", ".checkDescription($d).", ".$pp.")")!=TRUE){
+            if($con->connection->query("insert into Accounts(email_adress, nickname, pass, creation_date, descriptions, profile_picture) values(".$ea.", ".md5($p).", ".$rn.", ".$n.", ".checkDescription($d).", ".$pp.")")!=TRUE){
                 $error = "There was a problem with the database, please try again later!";
                 return $error;
             }
-        }
+        } else
+            return $error;
 
-        return new Account(DatabaseConnection::getInstance()->connection->query("select id_account from Accounts where email_adress = '".$ea."'"), $ea, md5($p), date("d-m-y h:i:s"), $n, checkDescription($d), $pp);
+        return new Account(DatabaseConnection::getInstance()->query("select id_account from Accounts where email_adress = '".$ea."'"), $ea, md5($p), $rn, $n, checkDescription($d), $pp);
     }
     public function isPasswordCorrect($p){
-        if(hash("md5", $p) == $this->pass)
+        if(md5($p) == $this->pass)
             return true;
         return false;
     }
