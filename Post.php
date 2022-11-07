@@ -21,17 +21,21 @@ class Post{
         $this->contents = $c;
     }
     public static function createNew(int $a, string $t, string $vt, string $c){
-        $this->error = checkTitle($t); $this->error = checkContents($c);
+        $error = checkTitle($t); 
+        if($error=="none")
+            $error = checkContents($c);
+        
         $rn = date("d-m-y h:i:s");
         if($error == "none"){
             $con = DatabaseConnection::getInstance();
-            if($con->connection->query("insert into Posts(publication_date, author, title, value_type, contents) values(".$rn.", ".$a.", ".$t.", ".$vt.", ".$c.")")!=TRUE){
-                $error = "There was a problem with the database, please try again later!";
+            if($con->query("insert into Posts(publication_date, author, title, value_type, contents) values(".$rn.", ".$a.", ".$t.", ".$vt.", ".$c.")")!=TRUE){
+                $error = "error.database";
                 return $error;
             }
         } else
             return $error;
-        return new Post(DatabaseConnection::getInstance()->query("select id_post from Posts where publication_date = '".$rn."' and author = ".$a), $rn, $a, $t, $vt, $c);
+        $con = DatabaseConnection::getInstance();
+        return new Post($con->query("select id_post from Posts where publication_date = '".$rn."' and author = ".$a), $rn, $a, $t, $vt, $c);
     }
 }
 

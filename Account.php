@@ -22,18 +22,24 @@ class Account{
         $this->profile_picture = $pp;
     }
     public static function createNew(string $ea, string $p, string $n, string $d, string $pp){ //returns either error message or a newly created account that is already in the database
-        $error = checkEmail($ea); $error = checkPass($p); $error = checkNickname($n);
+        $error = checkEmail($ea); 
+        if($error=="none")
+            $error = checkPass($p); 
+        if($error=="none")
+            $error = checkNickname($n);
+
         $rn = date("d-m-y h:i:s");
         if($error == "none"){
             $con = DatabaseConnection::getInstance();
-            if($con->connection->query("insert into Accounts(email_adress, nickname, pass, creation_date, descriptions, profile_picture) values(".$ea.", ".md5($p).", ".$rn.", ".$n.", ".checkDescription($d).", ".$pp.")")!=TRUE){
-                $error = "There was a problem with the database, please try again later!";
+            $conError = $con->query("insert into Accounts(email_adress, nickname, pass, creation_date, descriptions, profile_picture) values ('".$ea."', '".md5($p)."', '".$rn."', '".$n."', '".checkDescription($d)."', '".$pp."')");
+            if(!$conError){
+                $error = "error.database";
                 return $error;
             }
         } else
             return $error;
-
-        return new Account(DatabaseConnection::getInstance()->query("select id_account from Accounts where email_adress = '".$ea."'"), $ea, md5($p), $rn, $n, checkDescription($d), $pp);
+        $con = DatabaseConnection::getInstance();
+        return new Account(intval($con->query("select id_account from Accounts where email_adress = '".$ea."'")->fetch_array()[0]), $ea, md5($p), $rn, $n, checkDescription($d), $pp);
     }
     public function isPasswordCorrect($p){
         if(md5($p) == $this->pass)
