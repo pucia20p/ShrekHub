@@ -1,9 +1,33 @@
 <?php
+require_once "DatabaseConnection.php";
+require_once "warning_handler.php";
+function getEEFAO() : string{
+    try{
+        $x = [1];
+        $x2 = $x[1];
+    } catch(ErrorException $e){
+        $errorExeptionForArrayOffset = $e->getMessage();
+    }
+    return $errorExeptionForArrayOffset;
+}
+
+
 function checkEmail(string $ea) : string{
     if(!filter_var($ea, FILTER_VALIDATE_EMAIL)){
         return "error.account.creation.email";
     }
     return "none";
+}
+function isEmailInDatabase(string $ea) : string{
+    try{
+        $rrr = DatabaseConnection::$connection->query("select email_adress from Accounts where email_adress = '".$ea."'")->fetch_array()[0];
+    } catch (ErrorException $e) {
+        if($e->getMessage() != getEEFAO())
+            echo $e;
+        else
+            return "none";
+    }
+    return "error.account.creation.email.taken";
 }
 function checkPass(string $p) : string{
     if(!preg_match('/^[!@#%&*_+-=a-zA-Z0-9]{8}/', $p) || strlen($p) > 45){

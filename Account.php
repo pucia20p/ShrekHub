@@ -22,7 +22,13 @@ class Account{
         $this->profile_picture = $pp;
     }
     public static function createNew(string $ea, string $p, string $n, string $d, string $pp){ //returns either error message or a newly created account that is already in the database
-        $error = checkEmail($ea); 
+        $error = "none";
+        if($error=="none"){
+            $error = checkEmail($ea);
+            if($error=="none"){
+                $error = isEmailInDatabase($ea);
+            }
+        }
         if($error=="none")
             $error = checkPass($p); 
         if($error=="none")

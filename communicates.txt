@@ -1,6 +1,7 @@
 error.database //baza danych wyszła z życia
 
-error.account.creation.email //Email źle.
+error.account.creation.email //Email źle napisany
+error.account.creation.email.taken //Email zajęty
 error.account.creation.password //Hasło może się składać z dużych i małych liter, cyfr oraz znaków -_!@#%&* i musi zawierać od 8 do 45 znaków
 error.account.creation.nickname //Nick może się składać z dużych i małych liter, cyfr oraz znaków -_ i musi zawierać od 8 do 45 znaków
 
