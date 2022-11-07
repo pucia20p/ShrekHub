@@ -28,14 +28,14 @@ class Post{
         $rn = date("d-m-y h:i:s");
         if($error == "none"){
             $con = DatabaseConnection::getInstance();
-            if($con->query("insert into Posts(publication_date, author, title, value_type, contents) values(".$rn.", ".$a.", ".$t.", ".$vt.", ".$c.")")!=TRUE){
+            if($con->query("insert into Posts(publication_date, author, title, value_type, contents) values('".$rn."', '".$a."', '".$t."', '".$vt."', '".$c."')")!=TRUE){
                 $error = "error.database";
                 return $error;
             }
         } else
             return $error;
         $con = DatabaseConnection::getInstance();
-        return new Post($con->query("select id_post from Posts where publication_date = '".$rn."' and author = ".$a), $rn, $a, $t, $vt, $c);
+        return new Post(intval($con->query("select id_post from Posts where publication_date = '".$rn."' and author = ".$a)->fetch_array()[0]), $rn, $a, $t, $vt, $c);
     }
 }
 

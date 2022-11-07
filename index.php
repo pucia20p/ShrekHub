@@ -12,13 +12,15 @@ DatabaseConnection::defineTraits("localhost", "root", "", "ShreksHub");
 // $db->query("use Shrekshub");
 // $db->multi_query(file_get_contents("createDatabase.sql"));
 
-$acc = Account::createNew("puciap@hotmail.com", "anhgnsws", "pexdarkum", "desc", "none");
+$acc = Account::createNew("puciap@hotmail.com", "anhgnsws", "pexdarkum", "", "");
 if(gettype($acc) == gettype("ae"))    
     echo $acc;
-else
+else{
     echo $acc->isPasswordCorrect("anhgnsws");
-    
-$post = Post::createNew($acc->id_account, "Tytuuu", "video", "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    var_dump($acc);
+    $post = Post::createNew($acc->id_account, "Tytuuu", "video", "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+
+}
 
 
 ?>
