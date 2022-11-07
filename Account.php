@@ -37,8 +37,7 @@ class Account{
         $rn = date("d-m-y h:i:s");
         if($error == "none"){
             $con = DatabaseConnection::getInstance();
-            $conError = $con->query("insert into Accounts(email_adress, nickname, pass, creation_date, descriptions, profile_picture) values ('".$ea."', '".md5($p)."', '".$rn."', '".$n."', '".checkDescription($d)."', '".$pp."')");
-            if(!$conError){
+            if(!$con->query("insert into Accounts(email_adress, nickname, pass, creation_date, descriptions, profile_picture) values ('".$ea."', '".md5($p)."', '".$rn."', '".$n."', '".checkDescription($d)."', '".$pp."')")){
                 $error = "error.database";
                 return $error;
             }

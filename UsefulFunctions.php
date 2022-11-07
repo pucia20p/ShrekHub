@@ -1,15 +1,6 @@
 <?php
 require_once "DatabaseConnection.php";
-require_once "warning_handler.php";
-function getEEFAO() : string{
-    try{
-        $x = [1];
-        $x2 = $x[1];
-    } catch(ErrorException $e){
-        $errorExeptionForArrayOffset = $e->getMessage();
-    }
-    return $errorExeptionForArrayOffset;
-}
+
 
 
 function checkEmail(string $ea) : string{
@@ -19,14 +10,11 @@ function checkEmail(string $ea) : string{
     return "none";
 }
 function isEmailInDatabase(string $ea) : string{
-    try{
-        $rrr = DatabaseConnection::$connection->query("select email_adress from Accounts where email_adress = '".$ea."'")->fetch_array()[0];
-    } catch (ErrorException $e) {
-        if($e->getMessage() != getEEFAO())
-            echo $e;
-        else
-            return "none";
-    }
+    $rrr = DatabaseConnection::$connection->query("select email_adress from Accounts where email_adress = '".$ea."'")->fetch_array();
+    array_push($rrr, "check");
+    
+    if($rrr[0] == "check")
+        return "none";
     return "error.account.creation.email.taken";
 }
 function checkPass(string $p) : string{
@@ -46,6 +34,11 @@ function checkDescription(string $d) : string{
         return "account.default.description";
     }
     return $d;
+}
+function checkValueType(string $vt) : string{
+    if($vt != "text" && $vt != "image" && $vt != "video")
+        return "error.post.creation.value_type";
+    return "none";
 }
 function checkTitle(string $t) : string{
     if(strlen($t) >= 250 || strlen($t) <= 3)

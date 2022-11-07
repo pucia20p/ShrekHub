@@ -5,9 +5,11 @@ error.account.creation.email.taken //Email zajęty
 error.account.creation.password //Hasło może się składać z dużych i małych liter, cyfr oraz znaków -_!@#%&* i musi zawierać od 8 do 45 znaków
 error.account.creation.nickname //Nick może się składać z dużych i małych liter, cyfr oraz znaków -_ i musi zawierać od 8 do 45 znaków
 
+
 error.post.creation.title //post od 3 do 250 znaków
 error.post.creation.contents //za dużo znaków w poście
+error.post.creation.value_type //coś użytkownik se odwala
 
-error.post.creation.value_type = (string/image/video)
+post.creation.value_type = (text/image/video)
 
 account.default.description //Ten użytkownik nie ma opisu profilu
