@@ -5,6 +5,8 @@ error.account.creation.email.taken //Email zajęty
 error.account.creation.password //Hasło może się składać z dużych i małych liter, cyfr oraz znaków -_!@#%&* i musi zawierać od 8 do 45 znaków
 error.account.creation.nickname //Nick może się składać z dużych i małych liter, cyfr oraz znaków -_ i musi zawierać od 8 do 45 znaków
 
+error.account.login.email //email nie istnieje
+error.account.login.password //hasło źle
 
 error.post.creation.title //post od 3 do 250 znaków
 error.post.creation.contents //za dużo znaków w poście

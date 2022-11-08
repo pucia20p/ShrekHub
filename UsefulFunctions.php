@@ -9,13 +9,10 @@ function checkEmail(string $ea) : string{
     }
     return "none";
 }
-function isEmailInDatabase(string $ea) : string{
-    $rrr = DatabaseConnection::$connection->query("select email_adress from Accounts where email_adress = '".$ea."'")->fetch_array();
-    array_push($rrr, "check");
-    
-    if($rrr[0] == "check")
-        return "none";
-    return "error.account.creation.email.taken";
+function isEmailInDatabase(string $ea) : bool{
+    if(isset(DatabaseConnection::$connection->query("select email_adress from Accounts where email_adress = '".$ea."'")->fetch_array()[0]))
+        return true;
+    return false;
 }
 function checkPass(string $p) : string{
     if(!preg_match('/^[!@#%&*_+-=a-zA-Z0-9]{8}/', $p) || strlen($p) > 45){
