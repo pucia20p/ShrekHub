@@ -34,7 +34,7 @@ class Account{
         if($error=="none")
             $error = checkNickname($n);
 
-        $rn = date("d-m-y h:i:s");
+        $rn = date("y-m-d H:i:s");
         if($error == "none"){
             $con = DatabaseConnection::getInstance();
             if(!$con->query("insert into Accounts(email_adress, nickname, pass, creation_date, descriptions, profile_picture) values ('".$ea."', '".$n."', '".md5($p)."', '".$rn."', '".checkDescription($d)."', '".$pp."')")){

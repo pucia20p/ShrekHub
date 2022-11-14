@@ -18,6 +18,7 @@
 require_once "DatabaseConnection.php";
 require_once "Account.php";
 require_once "Post.php";
+session_start();
 
 
 
