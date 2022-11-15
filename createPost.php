@@ -12,6 +12,11 @@ if(!isset($_SESSION["currentUser"]) || $_SESSION["currentUser"] == "none"){
     header("refresh: 0; login.php");
 }
     ?>
+    <style>
+.d-flexx{
+    display: flex;
+}
+    </style>
 </head>
 <body class="d-flex justify-content-center align-items-center p-3">
     <main class="d-flex flex-column gap-3">
@@ -21,28 +26,37 @@ if(!isset($_SESSION["currentUser"]) || $_SESSION["currentUser"] == "none"){
             <select class="select">
                 <option value="text">tekst</option>
                 <option value="image">zdjęcie</option>
-                <option value="video">wideo</option>
+                <!-- <option value="video">wideo</option> -->
             </select>
         </div>
-        <div id="shrekhub-contents-text" class="d-flex flex-column gap-1 align-items-center">Treść postu: <textarea></textarea></div>
-        
+
+        <div id="shrekhub-contents-text" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Treść postu: <textarea></textarea></div>
+
+        <div id="shrekhub-contents-img" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Zdjęcie: <input type="file" name="img" id="shrekhub-img" accept="image/jpeg, image/png, image/jpg"></div>
+
         <input class="btn btn-success" type="button" value="Stwórz post">
         <div id="error"></div>
     </main>
     <script>
 const selector = document.querySelector("select");
-selector.addEventListener("change", () => {
-    document.querySelector("#shrekhub-contents-text").display = "none";
-});
+function changeStyle(){
+    if(selector.value == "text"){
+        document.querySelector("#shrekhub-contents-img").style.display = "none";
+        document.querySelector("#shrekhub-contents-text").style.display = "flex";
+    } else {
+        document.querySelector("#shrekhub-contents-text").style.display = "none";
+        document.querySelector("#shrekhub-contents-img").style.display = "flex";
+    }
+}
+changeStyle();
+selector.addEventListener("change", changeStyle);
 
-async function sendRegisterRequest(ea, p, n, d, pp){
-    let query = `confirmRegister.php`;
+async function sendCreatePostRequest(t, vt, c){
+    let query = `confirmCreatePost.php`;
     let formData = new FormData();
-    formData.append("ea", ea);
-    formData.append("p", p);
-    formData.append("n", n);
-    formData.append("d", d);
-    formData.append("pp", pp);
+    formData.append("t", t);
+    formData.append("vt", vt);
+    formData.append("c", c);
     const resp = await fetch(query, {method: 'POST', body: formData});
     const json = await resp.json();
     return json[0];
@@ -62,20 +76,20 @@ pps.addEventListener("change", ()=>{
 });
 
 document.querySelector("input[type=button]").addEventListener("click", ()=>{
-    let ea = document.querySelector("#shrekhub-email").value.trim();
-    let p = document.querySelector("#shrekhub-pass").value.trim();
-    let n = document.querySelector("#shrekhub-nickname").value.trim();
-    let d = document.querySelector("#shrekhub-desc").innerText.trim();
+    let t = document.querySelector("#shrekhub-title").value.trim();
+    let vt = document.querySelector(".select").value;
+    if(vt=="text")
+        c = document.querySelector("#shrekhub-contents-text>textarea").innerText.trim();
+    else
+        c = pp;
 
-    console.log(pp);
-    sendRegisterRequest(ea, p, n, d, pp)
+    sendCreatePostRequest(t, vt, c)
     .then((rep)=>{
         console.log(rep);
-        if(rep != "account.register.success"){
+        if(rep != "post.create.success"){
             document.querySelector("#error").innerText = rep;
         } else {
             document.querySelector("#error").innerText = "Wszystko git";
-
         }
     });
 });

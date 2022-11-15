@@ -35,6 +35,7 @@ async function sendRegisterRequest(ea, p, n, d, pp){
     formData.append("d", d);
     formData.append("pp", pp);
     const resp = await fetch(query, {method: 'POST', body: formData});
+    console.log(resp);
     const json = await resp.json();
     return json[0];
 }

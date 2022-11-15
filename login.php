@@ -42,7 +42,6 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
             document.querySelector("#error").innerText = "Wszystko git";
     })
 })
-
     </script>
 </body>
 </html>

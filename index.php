@@ -20,15 +20,12 @@ require_once "Account.php";
 require_once "Post.php";
 session_start();
 
-
-
-
-DatabaseConnection::defineTraits("localhost", "root", "", "");
+// DatabaseConnection::defineTraits("localhost", "root", "", "");
 
 // $db = DatabaseConnection::getInstance();
-// $db->query("drop database if exists ShreksHub");
-// $db->query("create database ShreksHub");
-// $db->query("use Shrekshub");
+// $db->query("drop database if exists ShrekHub");
+// $db->query("create database ShrekHub");
+// $db->query("use Shrekhub");
 // $db->multi_query(file_get_contents("createDatabase.sql"));
 
 

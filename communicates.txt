@@ -18,3 +18,4 @@ account.default.description //Ten użytkownik nie ma opisu profilu
 
 account.login.success //pomyślnie zalogowano
 account.register.success //pomyślnie zarejestrowano
+post.create.success //pomyślnie stworzono post
