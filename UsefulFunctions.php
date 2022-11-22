@@ -21,7 +21,7 @@ function checkPass(string $p) : string{
     return "none";
 }
 function checkNickname(string $n) : string{
-    if(!preg_match('/^[-_A-Za-z0-9]/', $n) || strlen($n) < 8 || strlen($n) > 45){
+    if(!preg_match('/^[-_A-Za-z0-9]/', $n) || strlen($n) < 3 || strlen($n) > 45){
         return "error.account.creation.nickname";
     }
     return "none";

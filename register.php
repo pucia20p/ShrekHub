@@ -67,7 +67,7 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
             document.querySelector("#error").innerText = rep;
         } else {
             document.querySelector("#error").innerText = "Wszystko git";
-
+            window.location.href = "index.php";
         }
     });
 });

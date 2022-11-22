@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rejestracja</title>
+    <title>Tworzenie postu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <?php 
 session_start();
 if(!isset($_SESSION["currentUser"]) || $_SESSION["currentUser"] == "none"){
     header("refresh: 0; login.php");
 }
+
     ?>
     <style>
 .d-flexx{
@@ -78,10 +79,13 @@ pps.addEventListener("change", ()=>{
 document.querySelector("input[type=button]").addEventListener("click", ()=>{
     let t = document.querySelector("#shrekhub-title").value.trim();
     let vt = document.querySelector(".select").value;
-    if(vt=="text")
+    let c;
+    if(vt=="text"){
         c = document.querySelector("#shrekhub-contents-text>textarea").innerText.trim();
-    else
+    } else {
         c = pp;
+    }
+    console.log(c);
 
     sendCreatePostRequest(t, vt, c)
     .then((rep)=>{

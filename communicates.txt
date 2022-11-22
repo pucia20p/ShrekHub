@@ -11,6 +11,7 @@ error.account.login.password //hasło źle
 error.post.creation.title //post od 3 do 250 znaków
 error.post.creation.contents //za dużo znaków w poście
 error.post.creation.value_type //coś użytkownik se odwala
+error.post.creation.notLogged //bruh.
 
 post.creation.value_type = (text/image/video)
 

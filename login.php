@@ -28,6 +28,7 @@ async function sendLoginRequest(ea, p) {
     formData.append("ea", ea);
     formData.append("p", p);
     const resp = await fetch(query, {method: 'POST', body: formData});
+    console.log(resp);
     const json = await resp.json();
     return json[0];
 }
@@ -38,9 +39,12 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
     .then((rep)=>{
         if(rep != "account.login.success"){
             document.querySelector("#error").innerText = rep;
-        } else 
+        } else {
             document.querySelector("#error").innerText = "Wszystko git";
+            window.location.href = "index.php";
+        }
     })
+
 })
     </script>
 </body>

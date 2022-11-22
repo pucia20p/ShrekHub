@@ -6,19 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShrekHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 
 </head>
-<body class="bc-black c-w">
-    <a class="btn btn-primary" href="login.php">login</a>
+<body>
+    <header class="d-flexx justify-content-between bg-secondary p-3">
+        <a href="index.php"><img src="logo.png" alt="logo"></a>
+        <nav>
+            <ul class="d-flexx flex-column justify-content-between align-items-end">
+                <li id="login">
+                    <a href="login.php" class="btn btn-primary">Zaloguj się</a>
+                </li>
+                <li id="createPost">
+                    <a href="createPost.php" class="btn btn-primary">Napisz coś...</a>
+                </li>
+                <li id="settings">
+                    <a href="settings.php" class="btn btn-primary">
+                        <img src="" alt="">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <script defer src="menu-control.js"></script>
 </body>
 </html>
 
 <?php
 
-require_once "DatabaseConnection.php";
-require_once "Account.php";
-require_once "Post.php";
-session_start();
+// require_once "DatabaseConnection.php";
+// require_once "Account.php";
+// require_once "Post.php";
+// session_start();
+// $_SESSION["currentUser"]="none";
 
 // DatabaseConnection::defineTraits("localhost", "root", "", "");
 
