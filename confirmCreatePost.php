@@ -12,7 +12,7 @@ if(!isset($_SESSION["currentUser"]) || $_SESSION["currentUser"] == "none"){
     if(gettype($temp) == gettype("string"))
         echo json_encode(array('0'=>$temp));
     else{
-        echo json_encode(array('0'=>"post.create.success"));
+        echo json_encode(array('0'=>"post.create.success", '1'=>$temp->id_post));
     }
 
 }

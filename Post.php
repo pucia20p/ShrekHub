@@ -25,9 +25,9 @@ class Post{
         if($error=="none")
             $error = checkTitle($t); 
         if($error=="none")
-            $error = checkContents($c);
-        if($error=="none")
             $error = checkValueType($vt);
+        if($error=="none" && $vt == "text")
+            $error = checkContents($c);
         
         $rn = date("d-m-y h:i:s");
         if($error == "none"){

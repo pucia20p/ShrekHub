@@ -51,7 +51,7 @@ function changeStyle(){
 }
 changeStyle();
 selector.addEventListener("change", changeStyle);
-
+let postid;
 async function sendCreatePostRequest(t, vt, c){
     let query = `confirmCreatePost.php`;
     let formData = new FormData();
@@ -60,6 +60,7 @@ async function sendCreatePostRequest(t, vt, c){
     formData.append("c", c);
     const resp = await fetch(query, {method: 'POST', body: formData});
     const json = await resp.json();
+    postid = json[1];
     return json[0];
 }
 let pp = "none";
@@ -94,6 +95,7 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
             document.querySelector("#error").innerText = rep;
         } else {
             document.querySelector("#error").innerText = "Wszystko git";
+            window.location.href = `index.php?postid=${postid}`;
         }
     });
 });

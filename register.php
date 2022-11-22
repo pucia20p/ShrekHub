@@ -37,6 +37,7 @@ async function sendRegisterRequest(ea, p, n, d, pp){
     const resp = await fetch(query, {method: 'POST', body: formData});
     console.log(resp);
     const json = await resp.json();
+    console.log(json[1]);
     return json[0];
 }
 let pp = "none";
@@ -67,7 +68,7 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
             document.querySelector("#error").innerText = rep;
         } else {
             document.querySelector("#error").innerText = "Wszystko git";
-            window.location.href = "index.php";
+            // window.location.href = "index.php";
         }
     });
 });

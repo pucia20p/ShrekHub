@@ -9,5 +9,5 @@ if(gettype($temp) == gettype("string"))
     echo json_encode(array('0'=>$temp));
 else{
     $_SESSION["currentUser"] = $temp;
-    echo json_encode(array('0'=>"account.register.success"));
+    echo json_encode(array('0'=>"account.register.success", $_POST["pp"]));
 }

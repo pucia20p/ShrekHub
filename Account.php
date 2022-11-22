@@ -65,6 +65,10 @@ class Account{
             return "error.account.login.password";
         return $acc;
     }
+    public static function getNumOfUsers() : int{
+        $con = DatabaseConnection::getInstance();
+        return $con->query("select id_account from Account order by id_account desc limit 1")->fetch_array()[0];
+    }
 }
 
 ?>
