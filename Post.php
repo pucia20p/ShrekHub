@@ -29,7 +29,7 @@ class Post{
         if($error=="none" && $vt == "text")
             $error = checkContents($c);
         
-        $rn = date("d-m-y h:i:s");
+        $rn = date("y-m-d h:i:s");
         if($error == "none"){
             $con = DatabaseConnection::getInstance();
             if($con->query("insert into Posts(publication_date, author, title, value_type, contents) values('".$rn."', '".$a."', '".$t."', '".$vt."', '".$c."')")!=TRUE){
@@ -40,6 +40,10 @@ class Post{
             return $error;
         $con = DatabaseConnection::getInstance();
         return new Post(intval($con->query("select id_post from Posts where publication_date = '".$rn."' and author = ".$a)->fetch_array()[0]), $rn, $a, $t, $vt, $c);
+    }
+    public static function getNumOfPosts() : int{
+        $con = DatabaseConnection::getInstance();
+        return $con->query("select id_post from Posts order by id_post desc limit 1")->fetch_array()[0];
     }
 }
 

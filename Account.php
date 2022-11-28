@@ -44,7 +44,7 @@ class Account{
         } else
             return $error;
         $con = DatabaseConnection::getInstance();
-        return new Account(intval($con->query("select id_account from Accounts where email_adress = '".$ea."'")->fetch_array()[0]), $ea, md5($p), $rn, $n, checkDescription($d), $pp);
+        return new Account(intval($con->query("select id_account from Accounts where email_adress = '".$ea."'")->fetch_array()[0]), $ea, $n, md5($p), $rn, checkDescription($d), $pp);
     }
     public function isPasswordCorrect($p){
         if(md5($p) == $this->pass)
@@ -67,7 +67,12 @@ class Account{
     }
     public static function getNumOfUsers() : int{
         $con = DatabaseConnection::getInstance();
-        return $con->query("select id_account from Account order by id_account desc limit 1")->fetch_array()[0];
+        return $con->query("select id_account from Accounts order by id_account desc limit 1")->fetch_array()[0];
+    }
+    public static function getPublicUserData(int $id){
+        $con = DatabaseConnection::getInstance();
+        $arr = $con->query("select id_account, nickname, descriptions, profile_picture from Accounts where id_account = ".$id)->fetch_array();
+        return $arr;
     }
 }
 

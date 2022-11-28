@@ -13,17 +13,20 @@ if(isset($_SESSION["currentUser"]) && $_SESSION["currentUser"] != "none"){
 } 
     ?>
 </head>
-<body class="d-flex justify-content-center align-items-center p-3">
-    <main class="d-flex flex-column gap-3">
-        <div class="d-flex flex-column gap-1 align-items-center">Email: <input type="text" name="email" id="shrekhub-email"></div>
-        <div class="d-flex flex-column gap-1 align-items-center">Hasło: <input type="password" name="pass" id="shrekhub-pass"></div>
-        <div class="d-flex flex-column gap-1 align-items-center">Nazwa użytkownika: <input type="text" name="nickname" id="shrekhub-nickname"></div>
-        <div class="d-flex flex-column gap-1 align-items-center">Opis profilu: <textarea id="shrekhub-desc"></textarea></div>
-        <div class="d-flex flex-column gap-1 align-items-center">Zdjęcie profilowe: <input type="file" name="img" id="shrekhub-img" accept="image/jpeg, image/png, image/jpg"></div>
-        
-        <input class="btn btn-success" type="button" value="Zarejestruj się">
-        <a class="btn btn-primary" href="login.php">Zaloguj się</a>
-        <div id="error"></div>
+<body>
+    <?php require_once "menu.php"; ?>
+    <main class="d-flex justify-content-center align-items-center p-3">
+        <div class="d-flex flex-column gap-3">
+            <div class="d-flex flex-column gap-1 align-items-center">Email: <input type="text" name="email" id="shrekhub-email"></div>
+            <div class="d-flex flex-column gap-1 align-items-center">Hasło: <input type="password" name="pass" id="shrekhub-pass"></div>
+            <div class="d-flex flex-column gap-1 align-items-center">Nazwa użytkownika: <input type="text" name="nickname" id="shrekhub-nickname"></div>
+            <div class="d-flex flex-column gap-1 align-items-center">Opis profilu: <textarea id="shrekhub-desc"></textarea></div>
+            <div class="d-flex flex-column gap-1 align-items-center">Zdjęcie profilowe: <input type="file" name="img" id="shrekhub-img" accept="image/jpeg, image/png, image/jpg"></div>
+            
+            <input class="btn btn-success" type="button" value="Zarejestruj się">
+            <a class="btn btn-primary" href="login.php">Zaloguj się</a>
+            <div id="error"></div>
+        </div>
     </main>
     <script>
 async function sendRegisterRequest(ea, p, n, d, pp){
@@ -58,7 +61,7 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
     let ea = document.querySelector("#shrekhub-email").value.trim();
     let p = document.querySelector("#shrekhub-pass").value.trim();
     let n = document.querySelector("#shrekhub-nickname").value.trim();
-    let d = document.querySelector("#shrekhub-desc").innerText.trim();
+    let d = document.querySelector("#shrekhub-desc").value.trim();
 
     console.log(pp);
     sendRegisterRequest(ea, p, n, d, pp)
@@ -68,7 +71,7 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
             document.querySelector("#error").innerText = rep;
         } else {
             document.querySelector("#error").innerText = "Wszystko git";
-            // window.location.href = "index.php";
+            window.location.href = "index.php";
         }
     });
 });

@@ -5,7 +5,7 @@ create table Accounts(
     pass varchar(45),
     creation_date datetime,
     descriptions varchar(250),
-    profile_picture varchar(250)
+    profile_picture varchar(10000)
 );
 create table Posts(
     id_post int primary key auto_increment,
@@ -14,5 +14,5 @@ create table Posts(
     FOREIGN KEY (author) REFERENCES Accounts(id_account),
     title varchar(250),
     value_type varchar(45),
-    contents varchar(1000)
+    contents varchar(10000)
 );

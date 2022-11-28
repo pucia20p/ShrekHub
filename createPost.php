@@ -19,24 +19,27 @@ if(!isset($_SESSION["currentUser"]) || $_SESSION["currentUser"] == "none"){
 }
     </style>
 </head>
-<body class="d-flex justify-content-center align-items-center p-3">
-    <main class="d-flex flex-column gap-3">
-        <div class="d-flex flex-column gap-1 align-items-center">Tytuł: <input type="text" name="title" id="shrekhub-title"></div>
-        <div class="d-flex flex-column gap-1 align-items-center">
-            Typ postu:
-            <select class="select">
-                <option value="text">tekst</option>
-                <option value="image">zdjęcie</option>
-                <!-- <option value="video">wideo</option> -->
-            </select>
+<body>
+    <?php require_once "menu.php"; ?>
+    <main class="d-flex justify-content-center align-items-center p-3">
+        <div class="d-flex flex-column gap-3">
+            <div class="d-flex flex-column gap-1 align-items-center">Tytuł: <input type="text" name="title" id="shrekhub-title"></div>
+            <div class="d-flex flex-column gap-1 align-items-center">
+                Typ postu:
+                <select class="select">
+                    <option value="text">tekst</option>
+                    <option value="image">zdjęcie</option>
+                    <!-- <option value="video">wideo</option> -->
+                </select>
+            </div>
+
+            <div id="shrekhub-contents-text" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Treść postu: <textarea value="jajco"></textarea></div>
+
+            <div id="shrekhub-contents-img" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Zdjęcie: <input type="file" name="img" id="shrekhub-img" accept="image/jpeg, image/png, image/jpg"></div>
+
+            <input class="btn btn-success" type="button" value="Stwórz post">
+            <div id="error"></div>
         </div>
-
-        <div id="shrekhub-contents-text" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Treść postu: <textarea></textarea></div>
-
-        <div id="shrekhub-contents-img" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Zdjęcie: <input type="file" name="img" id="shrekhub-img" accept="image/jpeg, image/png, image/jpg"></div>
-
-        <input class="btn btn-success" type="button" value="Stwórz post">
-        <div id="error"></div>
     </main>
     <script>
 const selector = document.querySelector("select");
@@ -82,7 +85,7 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
     let vt = document.querySelector(".select").value;
     let c;
     if(vt=="text"){
-        c = document.querySelector("#shrekhub-contents-text>textarea").innerText.trim();
+        c = document.querySelector("#shrekhub-contents-text textarea").value.trim();
     } else {
         c = pp;
     }
