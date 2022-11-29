@@ -45,10 +45,15 @@ nav a.btn{
 
 #settings img{
     height: 30px;
+    width: 30px;
     border-radius: 15px;
+}
+main>div>img{
+    cursor: pointer;
 }
 main>div>div>img{
     height: 60px;
+    width: 60px;
     border-radius: 30px;
 }
 body>div{
@@ -80,7 +85,7 @@ main{
     }
     main{
         padding: 0;
-        grid-template-columns: 100%;
+        grid-template-columns: 300px;
     }
     
     
@@ -107,4 +112,8 @@ main>div>div>div{
 }
 main *{
     margin: 0;
+}
+main>div>p{
+    display: flex;
+    word-wrap: break-word;
 }

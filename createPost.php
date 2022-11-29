@@ -35,7 +35,7 @@ if(!isset($_SESSION["currentUser"]) || $_SESSION["currentUser"] == "none"){
 
             <div id="shrekhub-contents-text" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Treść postu: <textarea value="jajco"></textarea></div>
 
-            <div id="shrekhub-contents-img" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Zdjęcie: <input type="file" name="img" id="shrekhub-img" accept="image/jpeg, image/png, image/jpg"></div>
+            <div id="shrekhub-contents-img" class="d-flexx flex-column gap-1 align-items-center" style="display: none;">Zdjęcie: <input type="file" name="img" id="shrekhub-img" accept="image/jpeg, image/png, image/jpg, image/gif"></div>
 
             <input class="btn btn-success" type="button" value="Stwórz post">
             <div id="error"></div>
@@ -86,6 +86,7 @@ document.querySelector("input[type=button]").addEventListener("click", ()=>{
     let c;
     if(vt=="text"){
         c = document.querySelector("#shrekhub-contents-text textarea").value.trim();
+        c.replace("\n", "<br>");
     } else {
         c = pp;
     }

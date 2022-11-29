@@ -50,6 +50,14 @@ async function getNumOfPosts(){
     const json = await resp.json();
     return json[0];
 }
+async function getPost(id){
+    let query = `getPost.php`;
+    let formData = new FormData();
+    formData.append("id", id);
+    const resp = await fetch(query, {method: 'POST', body: formData});
+    const json = await resp.json();
+    return json;
+}
 async function createElements(x){
     const img = document.createElement("img");
     if(x[8] == "none")
@@ -86,32 +94,79 @@ async function createElements(x){
     } else if(x["value_type"] == "image"){
         contents = document.createElement("img");
         contents.src = x["contents"];
+        contents.addEventListener("click", ()=>{
+            window.location.href = contents.src;
+        });
     }
+
+    const idText = document.createTextNode(x[0]);
+    const id = document.createElement("h5");
+    id.appendChild(idText);
+    id.style.display = 'none';
 
     const div = document.createElement("div");
     div.appendChild(div2);
     div.appendChild(title);
     div.appendChild(contents);
+    div.appendChild(id);
 
     // console.log(x["id_post"]);
     document.querySelector("main").appendChild(div);
 }
 
 let page = <?php echo $_GET["page"];?>;
-getLastPosts(page).then((result)=>{
-    result.forEach((z)=>{
-        createElements(z);
-    })
-    // console.log(result);
-});
-
 let numOfPosts, lastPage;
-getNumOfPosts().then((num)=>{
-    numOfPosts = num;
-    if(num <= 10)
-        document.querySelector("body>div>div").style.display = "none";
-    lastPage = Math.floor(numOfPosts/10);
-});
+
+// getLastPosts(page).then((result)=>{
+//     result.forEach((z)=>{
+//         createElements(z);
+//     })
+//     // console.log(result);
+// });
+function displayPost(post){
+    createElements(post);
+}
+function postsGetter(){
+    let it;
+    document.querySelector("main").innerHTML = "";
+    getNumOfPosts().then((num)=>{
+        numOfPosts = num;
+        it=num-(10*page);
+    })
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>getPost(it)).then((post)=>displayPost(post)).then(()=>it--)
+    .then(()=>{
+        if(numOfPosts <= 10)
+            document.querySelector("body>div>div").style.display = "none";
+        lastPage = Math.floor(numOfPosts/10);
+    });
+}
+function postsGetter2(){
+    getNumOfPosts().then((num)=>{
+        if(num!=numOfPosts){
+            postsGetter();
+        }
+    })
+}
+postsGetter();
+setInterval(postsGetter2, 10000);
+
+
+
+// getNumOfPosts().then((num)=>{
+//     numOfPosts = num;
+//     if(num <= 10)
+//         document.querySelector("body>div>div").style.display = "none";
+//     lastPage = Math.floor(numOfPosts/10);
+// });
 
 
 

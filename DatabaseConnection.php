@@ -1,7 +1,7 @@
 <?php
 
 class DatabaseConnection{
-    public static ?mysqli $connection;
+    public static $connection;
     private function __construct(){}
 
     public static function defineTraits($h, $u, $p, $d){
@@ -11,4 +11,5 @@ class DatabaseConnection{
         return DatabaseConnection::$connection;
     }
 }
-DatabaseConnection::defineTraits("localhost", "root", "", "ShrekHub");
+DatabaseConnection::defineTraits("localhost", "pexdark", "#Rodzina7", "pexdark_shrekhub");
+// echo DatabaseConnection::getInstance()->query("select * from Accounts");
