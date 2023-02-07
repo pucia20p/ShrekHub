@@ -7,3 +7,5 @@
 - Założenie konta.
 - Możliwość tworzenia postów jeśli użytkownik jest zalogowany.
 - Panel administracyjny do usuwania postów, kont, oraz komentarzy.
+
+[link do strony](https://shrekhub.zsti.me)
